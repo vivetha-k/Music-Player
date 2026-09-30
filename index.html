@@ -3,365 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Melody Music Player - A modern, feature-rich web music player">
+    <title>🎵 Melody Music Player</title>
 
-    <title>Pixora — Image Gallery</title>
-    <meta name="description" content="Pixora — A beautiful modern image gallery">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header class="header">
 
-        <div class="container nav">
-            <a href="#" class="logo">
-                <span class="logo-icon">✦</span>
-                <span>Pix<span class="logo-highlight">ora</span></span>
-            </a>
-            <div class="search-box">
-                <span class="search-icon">⌕</span>
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search images..."
-                    autocomplete="off"
-                >
-            </div>
-            <div class="nav-actions">
+    <div class="background-animation"></div>
 
-                <button
-                    class="nav-btn"
-                    id="favoritesBtn"
-                    title="View Favorites"
-                >
-                    ♡
-                    <span>Favorites</span>
-                    <span class="favorite-count" id="favoriteCount">0</span>
-                </button>
+    <div class="container">
 
-                <button
-                    class="icon-btn"
-                    id="themeToggle"
-                    title="Toggle Dark Mode"
-                    aria-label="Toggle Dark Mode"
-                >
-                    ☾
-                </button>
+        <header class="header">
 
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <h1>Melody</h1>
             </div>
 
-        </div>
+            <p class="tagline">Your Personal Music Studio</p>
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Switch to light theme">
+                <i class="fas fa-moon"></i>
+            </button>
 
-    </header>
-    <main>
+        </header>
 
-        <!-- Hero -->
-        <section class="hero">
+        <main class="main-content">
+            <section class="player-card">
 
-            <div class="container hero-content">
+                <!-- Album Art -->
+                <div class="album-art-container">
 
-                <div>
-                    <span class="eyebrow">✦ YOUR VISUAL SPACE</span>
+                    <div class="album-art-wrapper">
 
-                    <h1>
-                        Discover.
-                        <span>Save.</span>
-                        Enjoy.
-                    </h1>
+                        <img
+                            src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&h=500&fit=crop"
+                            alt="Album Cover"
+                            id="albumArt"
+                            class="album-art">
 
-                    <p>
-                        Explore beautiful moments through Pixora's
-                        curated image collection.
-                    </p>
-                </div>
+                        <div class="vinyl-effect"></div>
 
-            </div>
-
-        </section>
-        <section class="gallery-section">
-
-            <div class="container">
-                <div class="section-header">
-
-                    <div>
-                        <h2>Explore Gallery</h2>
-                        <p id="resultText">
-                            Discover beautiful images
-                        </p>
                     </div>
+                    <div class="equalizer" id="equalizer">
 
-                    <button
-                        class="clear-filter"
-                        id="clearFilter"
-                        hidden
-                    >
-                        Clear filters
-                    </button>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
 
-                </div>
-                <div class="categories" id="categoryFilters">
-
-                    <button
-                        class="category-btn active"
-                        data-category="all"
-                    >
-                        All
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="nature"
-                    >
-                        🌿 Nature
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="travel"
-                    >
-                        ✈️ Travel
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="animals"
-                    >
-                        🐾 Animals
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="architecture"
-                    >
-                        🏛️ Architecture
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="food"
-                    >
-                        🍜 Food
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="cars"
-                    >
-                        🚗 Cars
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="space"
-                    >
-                        🌌 Space
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="flowers"
-                    >
-                        🌸 Flowers
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="beaches"
-                    >
-                        🏖️ Beaches
-                    </button>
-
-                    <button
-                        class="category-btn"
-                        data-category="mountains"
-                    >
-                        🏔️ Mountains
-                    </button>
-
-                </div>
-                <div
-                    class="gallery-grid"
-                    id="galleryGrid"
-                >
-                </div>
-                <div
-                    class="no-results"
-                    id="noResults"
-                    hidden
-                >
-                    <div class="no-results-icon">🔍</div>
-
-                    <h3>No images found</h3>
-
-                    <p>
-                        Try another search or category.
-                    </p>
-
-                    <button
-                        class="reset-btn"
-                        id="resetSearch"
-                    >
-                        Reset Search
-                    </button>
-                </div>
-
-            </div>
-
-        </section>
-        <section
-            class="favorites-section"
-            id="favoritesSection"
-        >
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-                        <span class="eyebrow">♡ SAVED COLLECTION</span>
-
-                        <h2>Your Favorites</h2>
-
-                        <p>
-                            Images you've saved to your collection.
-                        </p>
                     </div>
 
                 </div>
+                <div class="song-info">
 
+                    <h2 class="song-title" id="songTitle">
+                        Summer Vibes
+                    </h2>
 
-                <div
-                    class="favorites-grid"
-                    id="favoritesGrid"
-                >
-                </div>
-                <div
-                    class="empty-favorites"
-                    id="emptyFavorites"
-                >
-
-                    <div class="empty-icon">♡</div>
-
-                    <h3>No favorites yet</h3>
-
-                    <p>
-                        Tap the heart icon on an image
-                        to save it here.
+                    <p class="song-artist" id="songArtist">
+                        Chill Beats
                     </p>
 
+                    <button
+                        class="favorite-btn"
+                        id="favoriteBtn"
+                        aria-label="Add to favorites">
+
+                        <i class="far fa-heart"></i>
+
+                    </button>
+
                 </div>
+                <div class="progress-container">
 
-            </div>
-
-        </section>
-
-    </main>
-    <div
-        class="lightbox"
-        id="lightbox"
-        aria-hidden="true"
-    >
-
-        <div class="lightbox-overlay" id="lightboxOverlay"></div>
-
-        <div class="lightbox-content">
-            <button
-                class="lightbox-close"
-                id="lightboxClose"
-                aria-label="Close"
-            >
-                ×
-            </button>
-            <button
-                class="lightbox-nav prev"
-                id="prevBtn"
-                aria-label="Previous image"
-            >
-                ‹
-            </button>
-            <div class="lightbox-image-wrapper">
-
-                <img
-                    id="lightboxImage"
-                    src=""
-                    alt=""
-                >
-
-                <button
-                    class="lightbox-favorite"
-                    id="lightboxFavorite"
-                    title="Add to Favorites"
-                >
-                    ♡
-                </button>
-
-            </div>
-            <button
-                class="lightbox-nav next"
-                id="nextBtn"
-                aria-label="Next image"
-            >
-                ›
-            </button>
-            <div class="lightbox-info">
-
-                <div>
                     <span
-                        class="lightbox-category"
-                        id="lightboxCategory"
-                    >
+                        class="current-time"
+                        id="currentTime">
+                        0:00
                     </span>
 
-                    <h3 id="lightboxTitle"></h3>
+                    <div class="progress-bar-wrapper">
+
+                        <input
+                            type="range"
+                            id="progressBar"
+                            class="progress-bar"
+                            min="0"
+                            max="100"
+                            value="0"
+                            aria-label="Seek music">
+
+                        <div
+                            class="progress-fill"
+                            id="progressFill">
+                        </div>
+
+                    </div>
+
+                    <span
+                        class="total-time"
+                        id="totalTime">
+                        0:00
+                    </span>
+
+                </div>
+                <div class="player-controls">
+                    <button
+                        class="control-btn"
+                        id="shuffleBtn"
+                        aria-label="Shuffle">
+
+                        <i class="fas fa-random"></i>
+
+                    </button>
+                    <button
+                        class="control-btn"
+                        id="prevBtn"
+                        aria-label="Previous song">
+
+                        <i class="fas fa-step-backward"></i>
+
+                    </button>
+                    <button
+                        class="play-btn"
+                        id="playBtn"
+                        aria-label="Play">
+
+                        <i
+                            class="fas fa-play"
+                            id="playIcon">
+                        </i>
+
+                    </button>
+                    <button
+                        class="control-btn"
+                        id="nextBtn"
+                        aria-label="Next song">
+
+                        <i class="fas fa-step-forward"></i>
+
+                    </button>
+                    <button
+                        class="control-btn"
+                        id="repeatBtn"
+                        aria-label="Repeat">
+
+                        <i class="fas fa-redo"></i>
+
+                    </button>
+
+                </div>
+                <div class="volume-control">
+
+                    <button
+                        class="volume-btn"
+                        id="volumeIcon"
+                        aria-label="Mute">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                    <div class="volume-slider-wrapper">
+
+                        <input
+                            type="range"
+                            id="volumeSlider"
+                            class="volume-slider"
+                            min="0"
+                            max="100"
+                            value="70"
+                            aria-label="Volume">
+
+                        <div
+                            class="volume-fill"
+                            id="volumeFill">
+                        </div>
+
+                    </div>
+
+                    <span
+                        class="volume-percentage"
+                        id="volumePercentage">
+                        70%
+                    </span>
+
                 </div>
 
-                <span
-                    class="lightbox-counter"
-                    id="lightboxCounter"
-                >
-                    1 / 1
-                </span>
+            </section>
 
-            </div>
 
-        </div>
-    <div class="toast" id="toast">
-        <span id="toastMessage">Added to favorites</span>
+            <div class="right-content">
+            <section class="playlist-section">
+                <div class="playlist-header">
+
+                    <h3>
+                        <i class="fas fa-list-ul"></i>
+                        Playlist
+                    </h3>
+
+                    <span
+                        class="playlist-count"
+                        id="playlistCount">
+                        5 songs
+                    </span>
+
+                </div>
+                <div class="search-container">
+
+                    <i class="fas fa-search search-icon"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search songs or artists...">
+
+                </div>
+                <div
+                    class="playlist"
+                    id="playlist">
+                </div>
+
+            </section>
+
+<section class="recently-played-section">
+
+    <div class="recently-played-header">
+
+        <h3>
+            <i class="fas fa-history"></i>
+            Recently Played
+        </h3>
+
+        <button
+            class="clear-recent-btn"
+            id="clearRecentBtn">
+            <i class="fas fa-trash"></i>
+            Clear
+        </button>
+
     </div>
-    </div>
-    <footer class="footer">
 
-        <div class="container footer-content">
+    <div
+        class="recently-played"
+        id="recentlyPlayed">
 
-            <div class="footer-brand">
-
-                <a href="#" class="logo">
-                    <span class="logo-icon">✦</span>
-                    <span>Pix<span class="logo-highlight">ora</span></span>
-                </a>
-
-                <p>
-                    Your visual space for beautiful moments.
-                </p>
-
-            </div>
-
-
-            <div class="footer-right">
-
-                <p>
-                    © 2026 Pixora. All rights reserved.
-                </p>
-
-                <p class="codealpha">
-                    CodeAlpha Internship · Task 1
-                </p>
-
-            </div>
-
+        <div class="no-recently-played">
+            <i class="fas fa-clock"></i>
+            <p>No recently played songs</p>
         </div>
 
-    </footer>
+    </div>
+
+</section>
+
+            </div>
+
+        </main>
+
+    </div>
+    <div
+        class="toast"
+        id="toast">
+
+        <i class="fas fa-music"></i>
+
+        <span id="toastMessage">
+            Now Playing
+        </span>
+
+    </div>
+
+    <audio
+        id="audioPlayer"
+        preload="metadata">
+    </audio>
+
     <script src="script.js"></script>
 
 </body>
