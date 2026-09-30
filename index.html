@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pixora — Image Gallery</title>
+    <meta name="description" content="Pixora — A beautiful modern image gallery">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+
+        <div class="container nav">
+            <a href="#" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>Pix<span class="logo-highlight">ora</span></span>
+            </a>
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search images..."
+                    autocomplete="off"
+                >
+            </div>
+            <div class="nav-actions">
+
+                <button
+                    class="nav-btn"
+                    id="favoritesBtn"
+                    title="View Favorites"
+                >
+                    ♡
+                    <span>Favorites</span>
+                    <span class="favorite-count" id="favoriteCount">0</span>
+                </button>
+
+                <button
+                    class="icon-btn"
+                    id="themeToggle"
+                    title="Toggle Dark Mode"
+                    aria-label="Toggle Dark Mode"
+                >
+                    ☾
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="container hero-content">
+
+                <div>
+                    <span class="eyebrow">✦ YOUR VISUAL SPACE</span>
+
+                    <h1>
+                        Discover.
+                        <span>Save.</span>
+                        Enjoy.
+                    </h1>
+
+                    <p>
+                        Explore beautiful moments through Pixora's
+                        curated image collection.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+        <section class="gallery-section">
+
+            <div class="container">
+                <div class="section-header">
+
+                    <div>
+                        <h2>Explore Gallery</h2>
+                        <p id="resultText">
+                            Discover beautiful images
+                        </p>
+                    </div>
+
+                    <button
+                        class="clear-filter"
+                        id="clearFilter"
+                        hidden
+                    >
+                        Clear filters
+                    </button>
+
+                </div>
+                <div class="categories" id="categoryFilters">
+
+                    <button
+                        class="category-btn active"
+                        data-category="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="nature"
+                    >
+                        🌿 Nature
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="travel"
+                    >
+                        ✈️ Travel
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="animals"
+                    >
+                        🐾 Animals
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="architecture"
+                    >
+                        🏛️ Architecture
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="food"
+                    >
+                        🍜 Food
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="cars"
+                    >
+                        🚗 Cars
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="space"
+                    >
+                        🌌 Space
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="flowers"
+                    >
+                        🌸 Flowers
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="beaches"
+                    >
+                        🏖️ Beaches
+                    </button>
+
+                    <button
+                        class="category-btn"
+                        data-category="mountains"
+                    >
+                        🏔️ Mountains
+                    </button>
+
+                </div>
+                <div
+                    class="gallery-grid"
+                    id="galleryGrid"
+                >
+                </div>
+                <div
+                    class="no-results"
+                    id="noResults"
+                    hidden
+                >
+                    <div class="no-results-icon">🔍</div>
+
+                    <h3>No images found</h3>
+
+                    <p>
+                        Try another search or category.
+                    </p>
+
+                    <button
+                        class="reset-btn"
+                        id="resetSearch"
+                    >
+                        Reset Search
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+        <section
+            class="favorites-section"
+            id="favoritesSection"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+                        <span class="eyebrow">♡ SAVED COLLECTION</span>
+
+                        <h2>Your Favorites</h2>
+
+                        <p>
+                            Images you've saved to your collection.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="favorites-grid"
+                    id="favoritesGrid"
+                >
+                </div>
+                <div
+                    class="empty-favorites"
+                    id="emptyFavorites"
+                >
+
+                    <div class="empty-icon">♡</div>
+
+                    <h3>No favorites yet</h3>
+
+                    <p>
+                        Tap the heart icon on an image
+                        to save it here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <div
+        class="lightbox"
+        id="lightbox"
+        aria-hidden="true"
+    >
+
+        <div class="lightbox-overlay" id="lightboxOverlay"></div>
+
+        <div class="lightbox-content">
+            <button
+                class="lightbox-close"
+                id="lightboxClose"
+                aria-label="Close"
+            >
+                ×
+            </button>
+            <button
+                class="lightbox-nav prev"
+                id="prevBtn"
+                aria-label="Previous image"
+            >
+                ‹
+            </button>
+            <div class="lightbox-image-wrapper">
+
+                <img
+                    id="lightboxImage"
+                    src=""
+                    alt=""
+                >
+
+                <button
+                    class="lightbox-favorite"
+                    id="lightboxFavorite"
+                    title="Add to Favorites"
+                >
+                    ♡
+                </button>
+
+            </div>
+            <button
+                class="lightbox-nav next"
+                id="nextBtn"
+                aria-label="Next image"
+            >
+                ›
+            </button>
+            <div class="lightbox-info">
+
+                <div>
+                    <span
+                        class="lightbox-category"
+                        id="lightboxCategory"
+                    >
+                    </span>
+
+                    <h3 id="lightboxTitle"></h3>
+                </div>
+
+                <span
+                    class="lightbox-counter"
+                    id="lightboxCounter"
+                >
+                    1 / 1
+                </span>
+
+            </div>
+
+        </div>
+    <div class="toast" id="toast">
+        <span id="toastMessage">Added to favorites</span>
+    </div>
+    </div>
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <a href="#" class="logo">
+                    <span class="logo-icon">✦</span>
+                    <span>Pix<span class="logo-highlight">ora</span></span>
+                </a>
+
+                <p>
+                    Your visual space for beautiful moments.
+                </p>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <p>
+                    © 2026 Pixora. All rights reserved.
+                </p>
+
+                <p class="codealpha">
+                    CodeAlpha Internship · Task 1
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+</html>
